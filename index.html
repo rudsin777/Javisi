@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">SIA Javisi - Bērza kokapstrāde Latgalē</title>
+<meta name="description" content="SIA Javisi - kokapstrādes uzņēmums Ludzas novadā. Bērza kokmateriāli FRAME GRADE, šķelda un skaidas. Iepērkam bērza taras klučus.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#231F20;
+  --ink-soft:#45413f;
+  --muted:#70726f;
+  --paper:#ffffff;
+  --birch:#F2F3F1;
+  --birch-2:#E7E8E5;
+  --line:#E3E4E1;
+  --line-dark:#37332f;
+  --green:#41B64D;
+  --green-600:#37A043;
+  --green-bright:#5CC65A;
+  --forest:#231F20;
+  --forest-2:#1A1718;
+  --charcoal:#211D1E;
+  --charcoal-2:#161314;
+  --oak:#8A8C8E;
+  --sand:#C9CBC8;
+
+  --font-display:'Archivo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-body:'Hanken Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  --wrap:1200px;
+  --gap:clamp(1.25rem,4vw,3rem);
+  --radius:14px;
+  --shadow:0 18px 50px -28px rgba(28,26,20,.55);
+  --fade:.28s;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--paper);
+  font-size:clamp(1rem,.96rem + .2vw,1.075rem);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;transition:color var(--fade) ease,background-color var(--fade) ease,border-color var(--fade) ease,opacity var(--fade) ease}
+button{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;margin:0;font-weight:800;letter-spacing:-.01em;overflow-wrap:break-word}
+p{margin:0}
+section[id]{scroll-margin-top:70px}
+
+.wrap{width:min(var(--wrap),92vw);margin-inline:auto}
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+.eyebrow{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:.82rem;
+  letter-spacing:.02em;
+  color:var(--green-600);
+  display:inline-flex;align-items:center;gap:.6rem;
+  margin-bottom:1.1rem;
+}
+.eyebrow::before{content:"";width:26px;height:3px;background:var(--green);border-radius:2px}
+h2.title{
+  font-size:clamp(1.9rem,1.2rem + 2.6vw,3.15rem);
+  font-stretch:112%;font-variation-settings:"wdth" 112;
+  max-width:18ch;
+}
+.lead{color:var(--ink-soft);max-width:56ch;margin-top:1.1rem;font-size:clamp(1.05rem,1rem + .3vw,1.2rem)}
+
+/* buttons: colour and shadow fade only, nothing moves */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  font-family:var(--font-display);font-weight:700;font-size:.98rem;line-height:1.2;text-align:center;
+  padding:.85rem 1.5rem;border-radius:10px;cursor:pointer;border:2px solid transparent;
+  transition:background-color var(--fade) ease,color var(--fade) ease,border-color var(--fade) ease,box-shadow var(--fade) ease;
+}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-600);box-shadow:0 12px 26px -14px rgba(55,160,67,.85)}
+.btn-ghost{background:transparent;border-color:currentColor;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-light{background:transparent;border-color:rgba(255,255,255,.4);color:#fff}
+.btn-light:hover{background:#fff;color:var(--charcoal);border-color:#fff}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--green-bright);outline-offset:2px
+}
+
+/* header */
+.header{
+  position:fixed;inset:0 0 auto 0;z-index:80;
+  padding:.9rem 0;
+  transition:background-color .3s ease,box-shadow .3s ease,padding .3s ease;
+}
+.header.scrolled{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);padding:.55rem 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.nav{display:flex;align-items:center;gap:1.5rem}
+.nav a{
+  font-family:var(--font-display);font-weight:600;font-size:.94rem;color:#fff;white-space:nowrap;
+  padding:.35rem 0;position:relative;transition:color var(--fade) ease;
+}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--green-bright);opacity:0;transition:opacity var(--fade) ease}
+.nav a:hover::after,.nav a:focus-visible::after{opacity:1}
+.nav a:hover{color:var(--green-bright)}
+.header.scrolled .nav a{color:var(--ink)}
+.header.scrolled .nav a:hover{color:var(--green-600)}
+
+.header-right{display:flex;align-items:center;gap:1.1rem}
+.lang{display:flex;gap:.15rem;font-family:var(--font-display);font-weight:700;font-size:.85rem}
+.lang button{background:none;border:0;color:rgba(255,255,255,.6);cursor:pointer;padding:.3rem .45rem;border-radius:6px;font-weight:700;
+  transition:color var(--fade) ease,background-color var(--fade) ease}
+.lang button:hover{color:#fff;background:rgba(255,255,255,.12)}
+.lang button.active{color:#fff}
+.header.scrolled .lang button{color:var(--muted)}
+.header.scrolled .lang button:hover{color:var(--ink);background:var(--birch)}
+.header.scrolled .lang button.active{color:var(--ink)}
+.header-tel{display:inline-flex;align-items:center;gap:.5rem;color:#fff;font-family:var(--font-display);font-weight:700;font-size:.95rem;white-space:nowrap}
+.header-tel:hover{color:var(--green-bright)}
+.header.scrolled .header-tel{color:var(--ink)}
+.header.scrolled .header-tel:hover{color:var(--green-600)}
+.header-tel svg{width:17px;height:17px}
+
+.burger{display:none;position:relative;z-index:2;background:none;border:0;cursor:pointer;width:44px;height:44px;border-radius:10px;transition:background-color var(--fade) ease}
+.burger:hover{background:rgba(255,255,255,.1)}
+.header.scrolled .burger:hover{background:var(--birch)}
+.burger span{position:absolute;left:9px;right:9px;height:2px;background:#fff;border-radius:2px;transition:transform .3s ease,opacity .25s ease,background-color var(--fade) ease}
+.burger span:nth-child(1){top:15px}
+.burger span:nth-child(2){top:21px}
+.burger span:nth-child(3){top:27px}
+.header.scrolled .burger span{background:var(--ink)}
+.burger.is-open span{background:#fff}
+.burger.is-open span:nth-child(1){top:21px;transform:rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+.logo{display:flex;align-items:center;gap:.7rem;flex:none}
+.logo-img{height:44px;width:auto;display:block}
+.logo-img-lg{height:60px}
+
+/* hero */
+.hero{
+  position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;
+  background:#171415;color:#fff;overflow:hidden;
+}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(20,18,19,.55) 0%,rgba(20,18,19,.5) 40%,rgba(20,18,19,.78) 100%);
+}
+.hero-overlay::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 42%,rgba(0,0,0,0) 40%,rgba(20,18,19,.45) 100%)}
+.hero-inner{
+  position:relative;z-index:2;width:min(var(--wrap),92vw);margin-inline:auto;
+  display:flex;flex-direction:column;align-items:center;
+  padding:calc(72px + clamp(2rem,7vh,4rem)) 0 clamp(3.5rem,8vh,5rem);
+}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--green-bright);
+  background:rgba(65,182,77,.16);border:1px solid rgba(65,182,77,.4);
+  padding:.4rem .9rem;border-radius:100px;margin-bottom:1.5rem;backdrop-filter:blur(4px);
+}
+.hero-kicker .pulse{width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none}
+.hero h1{
+  font-size:clamp(2.2rem,1rem + 5.4vw,5.4rem);
+  font-stretch:118%;font-variation-settings:"wdth" 118;
+  max-width:18ch;margin-inline:auto;letter-spacing:-.015em;
+  text-shadow:0 2px 30px rgba(0,0,0,.35);
+}
+.hero h1 em{font-style:normal;color:var(--green-bright)}
+.hero-sub{margin:1.6rem auto 0;max-width:52ch;color:#e7e5dd;font-size:clamp(1.02rem,1rem + .4vw,1.28rem);text-shadow:0 1px 16px rgba(0,0,0,.35)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.3rem;justify-content:center}
+.hero-scroll{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.6);animation:heroBob 2.2s ease-in-out infinite}
+.hero-scroll:hover{color:#fff}
+.hero-scroll svg{width:26px;height:26px}
+@keyframes heroBob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+.hero-strip{background:var(--forest-2);border-top:1px solid rgba(255,255,255,.12);color:#fff}
+.hero-strip-inner{width:min(var(--wrap),92vw);margin-inline:auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.hs-item{padding:1.15rem 1.4rem;display:flex;gap:.9rem;align-items:flex-start;border-left:1px solid rgba(255,255,255,.1)}
+.hs-item:first-child{border-left:0;padding-left:0}
+.hs-item svg{width:26px;height:26px;color:var(--green-bright);flex:none;margin-top:2px}
+.hs-item h3{font-size:1rem;color:#fff;font-stretch:105%}
+.hs-item p{font-size:.86rem;color:#b7b4a8;margin-top:.15rem;line-height:1.45}
+
+/* about */
+.about{background:var(--paper)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.about-p2{margin-top:1.1rem;color:var(--ink-soft);max-width:56ch}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.stat{background:var(--paper);padding:1.6rem 1.5rem;transition:background-color var(--fade) ease}
+.stat:hover{background:var(--birch)}
+.stat .num{font-family:var(--font-display);font-weight:900;font-stretch:115%;font-size:clamp(1.9rem,1.4rem + 2vw,2.9rem);color:var(--green-600);line-height:1;white-space:nowrap}
+.stat .lbl{color:var(--muted);font-size:.92rem;margin-top:.45rem}
+
+/* services */
+.services{background:var(--birch)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+.svc{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.8rem 1.6rem;display:flex;flex-direction:column;
+  transition:box-shadow .35s ease,border-color .35s ease;
+}
+.svc:hover{box-shadow:var(--shadow);border-color:var(--sand)}
+.svc-ico{width:54px;height:54px;border-radius:12px;background:var(--forest);display:grid;place-items:center;margin-bottom:1.25rem;transition:background-color .35s ease}
+.svc-ico svg{width:28px;height:28px;color:var(--green-bright);transition:color .35s ease}
+.svc:hover .svc-ico{background:var(--green)}
+.svc:hover .svc-ico svg{color:#fff}
+.svc h3{font-size:1.22rem;font-stretch:106%;margin-bottom:.55rem}
+.svc p{color:var(--muted);font-size:.95rem;flex:1}
+
+/* we buy */
+.buy{background:linear-gradient(160deg,var(--forest) 0%,var(--forest-2) 100%);color:#fff;position:relative;overflow:hidden}
+.buy::after{content:"";position:absolute;right:-120px;bottom:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(154,201,62,.14),transparent 65%);pointer-events:none}
+.buy .eyebrow{color:var(--green-bright)}
+.buy .eyebrow::before{background:var(--green-bright)}
+.buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,4.5rem);position:relative;z-index:2;align-items:start}
+.buy h2.title{color:#fff}
+.buy-lead{color:#cdd3c0;max-width:46ch;margin-top:1.1rem}
+.buy-species{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}
+.chip{border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:.45rem 1rem;font-size:.9rem;font-family:var(--font-display);font-weight:600}
+.buy-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;margin-top:1.4rem;max-width:32rem}
+.spec{display:flex;gap:.85rem;align-items:center;padding:1.05rem 1.15rem;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.04);
+  transition:border-color var(--fade) ease,background-color var(--fade) ease}
+.spec:hover{border-color:rgba(92,198,90,.5);background:rgba(255,255,255,.07)}
+.spec svg{width:24px;height:24px;color:var(--green-bright);flex:none}
+.spec .k{font-family:var(--font-display);font-weight:700;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#9a9e8f}
+.spec .v{font-family:var(--font-display);font-weight:800;font-size:1.12rem;color:#fff;line-height:1.25;white-space:nowrap}
+.buy-cta{margin-top:2rem}
+.buy-terms{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:1.8rem}
+.buy-terms h3{font-size:1.15rem;margin-bottom:1.1rem;color:#fff}
+.term{display:flex;gap:.85rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.1);align-items:flex-start}
+.term:first-of-type{border-top:0}
+.term svg{width:20px;height:20px;color:var(--green-bright);flex:none;margin-top:3px}
+.term span{color:#dfe3d6;font-size:.94rem}
+.term b{color:#fff;font-weight:600}
+
+/* products */
+.products{background:var(--paper)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+.prod{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper);display:flex;flex-direction:column;
+  transition:box-shadow .35s ease}
+.prod:hover{box-shadow:0 14px 34px -18px rgba(28,26,20,.38)}
+.prod-img{aspect-ratio:16/11;position:relative;overflow:hidden;background:var(--birch-2)}
+.prod-img img{width:100%;height:100%;object-fit:cover;display:block}
+.prod-tag{position:absolute;top:.9rem;left:.9rem;background:rgba(20,22,14,.82);color:#fff;font-family:var(--font-display);
+  font-weight:700;font-size:.72rem;letter-spacing:.04em;padding:.35rem .7rem;border-radius:6px}
+.prod-body{padding:1.35rem 1.4rem 1.5rem}
+.prod-body h3{font-size:1.15rem;font-stretch:105%;margin-bottom:.4rem}
+.prod-body p{color:var(--muted);font-size:.92rem}
+
+/* gallery */
+.gallery{background:var(--birch)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:.9rem;margin-top:3rem}
+.gal-item{border-radius:12px;overflow:hidden;position:relative;background:var(--birch-2);transition:box-shadow .35s ease}
+.gal-item:hover{box-shadow:0 14px 34px -18px rgba(28,26,20,.38)}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-item.big{grid-column:span 2;grid-row:span 2}
+.gal-item.wide{grid-column:span 2}
+
+/* contact */
+.contact{background:var(--charcoal);color:#fff}
+.contact .eyebrow{color:var(--green-bright)}
+.contact .eyebrow::before{background:var(--green-bright)}
+.contact h2.title{color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,6vw,4.5rem);margin-top:2.5rem}
+.cinfo{display:flex;flex-direction:column;gap:1.4rem;min-width:0}
+.cline{display:flex;gap:1rem;align-items:flex-start;min-width:0}
+.cline > div{min-width:0}
+.cline svg{width:22px;height:22px;color:var(--green-bright);flex:none;margin-top:3px}
+.cline .k{font-family:var(--font-display);font-weight:700;font-size:.78rem;letter-spacing:.06em;color:#8f9482;margin-bottom:.15rem;text-transform:uppercase}
+.cline .v{color:#eceadf;font-size:1.02rem;overflow-wrap:anywhere}
+.cline a.v:hover{color:var(--green-bright)}
+.map{margin-top:.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.15);height:230px}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(.2) contrast(1.05)}
+
+form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:1.9rem;min-width:0}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-family:var(--font-display);font-weight:600;font-size:.85rem;color:#cfd2c6;margin-bottom:.4rem}
+.field input,.field textarea{
+  width:100%;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.16);border-radius:9px;
+  padding:.8rem .9rem;color:#fff;font-family:var(--font-body);font-size:1rem;transition:border-color var(--fade) ease,background-color var(--fade) ease}
+.field input:hover,.field textarea:hover{border-color:rgba(255,255,255,.32)}
+.field input:focus,.field textarea:focus{border-color:var(--green-bright);outline:none;background:rgba(0,0,0,.32)}
+.field textarea{resize:vertical;min-height:110px}
+.form-send{width:100%}
+.form-note{font-size:.8rem;color:#9a9e8f;margin-top:.9rem}
+.form-ok{display:none;background:rgba(154,201,62,.14);border:1px solid rgba(154,201,62,.4);color:#e7f2cf;
+  padding:.9rem 1rem;border-radius:9px;margin-top:1rem;font-size:.95rem}
+.form-ok.show{display:block}
+
+/* footer */
+.footer{background:var(--charcoal-2);color:#cfcdc2;padding:clamp(3rem,6vw,4.5rem) 0 2rem}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line-dark)}
+.footer p{color:#9d9a8e;font-size:.92rem;margin-top:1.1rem;max-width:34ch}
+.footer h4{font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7f836f;margin-bottom:1.1rem}
+.footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.footer ul a{color:#cfcdc2;font-size:.94rem}
+.footer ul a:hover{color:var(--green-bright)}
+.footer-addr{color:#9d9a8e}
+.footer-bottom{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;color:#7f836f;font-size:.85rem}
+
+/* mobile + tablet menu */
+.mnav{position:fixed;inset:0;z-index:70;background:linear-gradient(180deg,#221e1f 0%,#161314 100%);
+  display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
+  padding:calc(72px + 1.4rem) 1.6rem 2rem;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .35s ease,transform .35s ease,visibility .35s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-links a{color:#fff;font-family:var(--font-display);font-weight:700;font-stretch:108%;
+  font-size:clamp(1.6rem,7vw,2.3rem);padding:.62rem 0;border-bottom:1px solid rgba(255,255,255,.08);
+  opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease,color var(--fade) ease}
+.mnav.open .mnav-links a{opacity:1;transform:none}
+.mnav.open .mnav-links a:nth-child(1){transition-delay:.06s}
+.mnav.open .mnav-links a:nth-child(2){transition-delay:.11s}
+.mnav.open .mnav-links a:nth-child(3){transition-delay:.16s}
+.mnav.open .mnav-links a:nth-child(4){transition-delay:.21s}
+.mnav.open .mnav-links a:nth-child(5){transition-delay:.26s}
+.mnav.open .mnav-links a:nth-child(6){transition-delay:.31s}
+.mnav.open .mnav-links a:hover{color:var(--green-bright);transition-delay:0s}
+.mnav-foot{margin-top:1.8rem;color:#b7b4a8;display:flex;flex-direction:column;gap:1rem;
+  opacity:0;transform:translateY(14px);transition:opacity .45s ease .34s,transform .45s ease .34s}
+.mnav.open .mnav-foot{opacity:1;transform:none}
+.mnav-foot .mf-contact a{display:block;font-size:1.1rem;font-weight:600;color:var(--green-bright);padding:.15rem 0}
+.mnav-foot .mf-contact a:hover{color:#fff}
+.mnav-lang{display:inline-flex;gap:.4rem;align-self:flex-start;border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:.25rem}
+.mnav-lang button{background:none;border:0;color:#b7b4a8;font-family:var(--font-display);font-weight:700;font-size:.9rem;cursor:pointer;padding:.35rem .8rem;border-radius:100px;
+  transition:background-color var(--fade) ease,color var(--fade) ease}
+.mnav-lang button:hover{color:#fff;background:rgba(255,255,255,.1)}
+.mnav-lang button.active{background:var(--green);color:#fff}
+
+body.nav-open .header{background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+body.nav-open .burger span{background:#fff}
+
+/* small desktop: keep the header on one line */
+@media (max-width:1240px){
+  .header-tel{display:none}
+}
+/* tablet */
+@media (max-width:1060px){
+  .nav,.header-right .lang{display:none}
+  .burger{display:block}
+  .about-grid,.buy-grid,.contact-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .svc-grid .svc:last-child{grid-column:1 / -1}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .buy-specs{max-width:none}
+  .gal-grid{grid-auto-rows:150px}
+}
+@media (max-width:760px){
+  .hero-strip-inner{grid-template-columns:1fr}
+  .hs-item{border-left:0;border-top:1px solid rgba(255,255,255,.1);padding:1rem 0}
+  .hs-item:first-child{border-top:0}
+}
+/* mobile */
+@media (max-width:640px){
+  .logo-img{height:38px}
+  .svc-grid,.prod-grid,.stats{grid-template-columns:1fr}
+  .svc-grid .svc:last-child{grid-column:auto}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .gal-item.big{grid-column:span 2;grid-row:span 1}
+  .gal-item.wide{grid-column:span 2}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .hero-inner{padding-top:calc(64px + 2rem)}
+  .hero-kicker{font-size:.84rem}
+  .hero-cta{width:100%;flex-direction:column}
+  .hero-cta .btn{width:100%}
+  .about-cta .btn,.buy-cta .btn{width:100%}
+  .buy-terms,form{padding:1.4rem}
+  .stat{padding:1.3rem 1.2rem}
+}
+@media (max-width:480px){
+  .buy-specs{grid-template-columns:1fr}
+}
+@media (max-width:380px){
+  .logo-img{height:34px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+.reveal{opacity:0;transform:translateY(22px);animation:rise .8s cubic-bezier(.22,.68,.32,1) forwards}
+.reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.2s}.reveal.d3{animation-delay:.32s}.reveal.d4{animation-delay:.44s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;animation:none}}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo" aria-label="Javisi">
+      <img src="logo.svg" alt="Javisi" class="logo-img" width="134" height="44">
+    </a>
+
+    <nav class="nav" aria-label="Galvenā navigācija">
+      <a href="#about" data-i18n="nav_about">Par mums</a>
+      <a href="#services" data-i18n="nav_services">Pakalpojumi</a>
+      <a href="#buy" data-i18n="nav_buy">Iepērkam</a>
+      <a href="#products" data-i18n="nav_products">Produkcija</a>
+      <a href="#gallery" data-i18n="nav_gallery">Galerija</a>
+      <a href="#contact" data-i18n="nav_contact">Kontakti</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="lang" role="group" aria-label="Valoda">
+        <button data-lang="lv" class="active">LV</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ru">RU</button>
+      </div>
+      <a href="tel:+37120231000" class="header-tel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg>
+        +371 20 231 000
+      </a>
+      <button class="burger" id="burger" aria-label="Atvērt izvēlni" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" aria-hidden="true">
+  <nav class="mnav-links">
+    <a href="#about" data-i18n="nav_about">Par mums</a>
+    <a href="#services" data-i18n="nav_services">Pakalpojumi</a>
+    <a href="#buy" data-i18n="nav_buy">Iepērkam</a>
+    <a href="#products" data-i18n="nav_products">Produkcija</a>
+    <a href="#gallery" data-i18n="nav_gallery">Galerija</a>
+    <a href="#contact" data-i18n="nav_contact">Kontakti</a>
+  </nav>
+  <div class="mnav-foot">
+    <div class="mf-contact">
+      <a href="tel:+37120231000">+371 20 231 000</a>
+      <a href="mailto:javisi@inbox.lv">javisi@inbox.lv</a>
+    </div>
+    <div class="mnav-lang lang">
+      <button data-lang="lv" class="active">LV</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="ru">RU</button>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="img/img7.JPG">
+    <source src="img/video1.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="hero-kicker reveal"><span class="pulse"></span><span data-i18n="hero_kicker">Bērza kokapstrāde Latgalē</span></span>
+    <h1 class="reveal d1"><span data-i18n="hero_h1_a">No baļķa līdz </span><em data-i18n="hero_h1_b">zāģmateriālam.</em></h1>
+    <p class="hero-sub reveal d2" data-i18n="hero_sub">SIA Javisi ir kokapstrādes uzņēmums Ludzas novadā. Specializējamies bērza zāģmateriālu ražošanā un zāģējam pēc jūsu izmēriem.</p>
+    <div class="hero-cta reveal d3">
+      <a href="#products" class="btn btn-primary" data-i18n="hero_cta1">Mūsu produkcija</a>
+      <a href="#contact" class="btn btn-light" data-i18n="hero_cta2">Sazināties</a>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll" aria-label="Ritināt uz leju">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+  </a>
+</section>
+
+<div class="hero-strip reveal d4">
+  <div class="hero-strip-inner">
+    <div class="hs-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg>
+      <div><h3 data-i18n="hs1_t">Precīza zāģēšana</h3><p data-i18n="hs1_p">Vienmērīga kvalitāte katrā partijā.</p></div>
+    </div>
+    <div class="hs-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-6M12 16l-4-3M12 13l4-3"/><path d="M12 3c2.5 2 4 4 4 6a4 4 0 0 1-8 0c0-2 1.5-4 4-6z"/></svg>
+      <div><h3 data-i18n="hs2_t">Bērza specializācija</h3><p data-i18n="hs2_p">Strādājam ar bērza koksni.</p></div>
+    </div>
+    <div class="hs-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12V8a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v4M4 12h16v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM6 18v2M18 18v2"/></svg>
+      <div><h3 data-i18n="hs3_t">Pēc pasūtījuma</h3><p data-i18n="hs3_p">Zāģējam pēc jūsu izmēriem.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="section about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <span class="eyebrow" data-i18n="about_eyebrow">Par mums</span>
+      <h2 class="title" data-i18n="about_title">Kokapstrāde, kas sākas mežā</h2>
+      <p class="lead" data-i18n="about_lead">SIA Javisi ir kokapstrādes uzņēmums Ludzas novadā, Latgalē. Iepērkam apaļkoku un ražojam kvalitatīvus bērza zāģmateriālus.</p>
+      <p class="about-p2" data-i18n="about_p2">Katrā posmā, no baļķa atlases līdz gatavam zāģmateriālam, ievērojam kvalitāti un nolīgtos termiņus.</p>
+      <div class="about-cta" style="margin-top:2rem">
+        <a href="#contact" class="btn btn-ghost" data-i18n="about_cta">Runāsim par sadarbību</a>
+      </div>
+    </div>
+    <div class="stats" aria-label="Uzņēmuma rādītāji">
+      <div class="stat"><div class="num" data-i18n="stat1_n">2011</div><div class="lbl" data-i18n="stat1_l">Uzņēmuma dibināšanas gads</div></div>
+      <div class="stat"><div class="num" data-i18n="stat2_n">25+</div><div class="lbl" data-i18n="stat2_l">Darbinieki komandā</div></div>
+      <div class="stat"><div class="num" data-i18n="stat3_n">30&thinsp;000 m³</div><div class="lbl" data-i18n="stat3_l">Apstrādāta koksne gadā</div></div>
+      <div class="stat"><div class="num" data-i18n="stat4_n">8</div><div class="lbl" data-i18n="stat4_l">Eksporta valstis Eiropā</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="svc_eyebrow">Ko mēs darām</span>
+    <h2 class="title" data-i18n="svc_title">Bērza kokapstrāde no baļķa līdz dēlim</h2>
+    <p class="lead" data-i18n="svc_lead">Iepērkam apaļkoku, zāģējam bērza zāģmateriālus un piedāvājam ražošanas blakusproduktus.</p>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/><path d="M3 21h18"/></svg></div>
+        <h3 data-i18n="svc1_t">Bērza zāģmateriāli</h3>
+        <p data-i18n="svc1_p">Kvalitatīvi bērza kokmateriāli FRAME GRADE kvalitātē.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 6l2 14h14l2-14M8 6V4h8v2M8 11v5M12 11v5M16 11v5"/></svg></div>
+        <h3 data-i18n="svc2_t">Zāģēšana pēc pasūtījuma</h3>
+        <p data-i18n="svc2_p">Zāģējam pēc jūsu norādītajiem izmēriem un kvalitātes prasībām.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-9 4 4 4-9 4 14zM4 20h16"/></svg></div>
+        <h3 data-i18n="svc3_t">Šķelda un skaidas</h3>
+        <p data-i18n="svc3_p">Ražošanas blakusprodukti: šķelda un zāģskaidas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section buy" id="buy">
+  <div class="wrap buy-grid">
+    <div>
+      <span class="eyebrow" data-i18n="buy_eyebrow">Iepērkam</span>
+      <h2 class="title" data-i18n="buy_title">Iepērkam bērza taras klučus</h2>
+      <p class="buy-lead" data-i18n="buy_lead">Pērkam bērza taras klučus. Sazinieties ar mums par aktuālajām cenām un piegādes noteikumiem.</p>
+      <div class="buy-species" aria-label="Sugas">
+        <span class="chip" data-i18n="sp1">Bērzs</span>
+      </div>
+      <div class="buy-specs">
+        <div class="spec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>
+          <div><div class="k" data-i18n="spec_len_k">Garums</div><div class="v" data-i18n="spec_len_v">2,5 m / 2,8 m</div></div>
+        </div>
+        <div class="spec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M6 18 18 6"/></svg>
+          <div><div class="k" data-i18n="spec_dia_k">Diametrs</div><div class="v" data-i18n="spec_dia_v">līdz 30 cm</div></div>
+        </div>
+      </div>
+      <div class="buy-cta">
+        <a href="tel:+37120231000" class="btn btn-light" data-i18n="buy_cta">Uzzināt cenas</a>
+      </div>
+    </div>
+    <div class="buy-terms">
+      <h3 data-i18n="terms_title">Piegādes noteikumi</h3>
+      <div class="term">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span data-i18n="term1"><b>Piegāde</b> darba dienās no plkst. 8.00 līdz 22.00.</span>
+      </div>
+      <div class="term">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+        <span data-i18n="term2">Kravai pievieno <b>ciršanas apliecinājuma kopiju</b> un izcelsmes ķēdi līdz meža īpašniekam.</span>
+      </div>
+      <div class="term">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        <span data-i18n="term3">Pavaddokumentus var iesūtīt <b>iepriekš</b> uz e-pastu vai WhatsApp.</span>
+      </div>
+      <div class="term">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span data-i18n="term4">Bez pilna dokumentu komplekta kravas <b>netiek apmaksātas</b>.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section products" id="products">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="prod_eyebrow">Produkcija</span>
+    <h2 class="title" data-i18n="prod_title">Ko mēs ražojam</h2>
+    <p class="lead" data-i18n="prod_lead">Kvalitatīvi bērza kokmateriāli būvniecībai un ražošanai.</p>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+</section>
+
+<section class="section gallery" id="gallery">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="gal_eyebrow">Galerija</span>
+    <h2 class="title" data-i18n="gal_title">Ieskats mūsu darbā</h2>
+    <div class="gal-grid" id="galGrid"></div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="con_eyebrow">Kontakti</span>
+    <h2 class="title" data-i18n="con_title">Sazināsimies</h2>
+    <div class="contact-grid">
+      <div class="cinfo">
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div><div class="k" data-i18n="con_person_k">Kontaktpersona</div><div class="v">Mihails Sinkovecs</div></div>
+        </div>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg>
+          <div><div class="k" data-i18n="con_tel_k">Tālrunis</div><a class="v" href="tel:+37120231000">+371 20 231 000</a></div>
+        </div>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          <div><div class="k" data-i18n="con_mail_k">E-pasts</div><a class="v" href="mailto:javisi@inbox.lv">javisi@inbox.lv</a></div>
+        </div>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="k" data-i18n="con_addr_k">Adrese</div><div class="v">Lepeste, Mežvidu pagasts,<br>Ludzas novads, LV-5725, Latvija</div></div>
+        </div>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+          <div><div class="k" data-i18n="con_road_k">Piebraucamais ceļš</div><a class="v" data-i18n="con_road_v" href="https://www.google.com/maps?q=Lepeste,+Me%C5%BEvidu+pagasts,+Ludzas+novads,+LV-5725" target="_blank" rel="noopener">Atvērt maršrutu kartē</a></div>
+        </div>
+        <div class="map">
+          <iframe title="SIA Javisi karte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Me%C5%BEvidu+pagasts,+Ludzas+novads,+LV-5725&z=11&output=embed"></iframe>
+        </div>
+      </div>
+
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label for="cf-name" data-i18n="f_name">Vārds *</label>
+          <input id="cf-name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="cf-email" data-i18n="f_email">E-pasts *</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="cf-phone" data-i18n="f_phone">Tālrunis</label>
+          <input id="cf-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="cf-msg" data-i18n="f_msg">Ziņojums *</label>
+          <textarea id="cf-msg" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-send" data-i18n="f_send">Nosūtīt ziņojumu</button>
+        <p class="form-note" data-i18n="f_note">Nospiežot "Nosūtīt", atvērsies jūsu e-pasta programma ar sagatavotu vēstuli.</p>
+        <div class="form-ok" id="formOk" data-i18n="f_ok">Paldies! Sagatavojām vēstuli, pabeidziet sūtīšanu e-pasta logā.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="logo" aria-label="Javisi"><img src="logo.svg" alt="Javisi" class="logo-img logo-img-lg" width="183" height="60"></a>
+        <p data-i18n="foot_about">Bērza kokapstrādes uzņēmums Ludzas novadā. Bērza kokmateriāli un blakusprodukti.</p>
+      </div>
+      <div>
+        <h4 data-i18n="foot_nav">Sadaļas</h4>
+        <ul>
+          <li><a href="#about" data-i18n="nav_about">Par mums</a></li>
+          <li><a href="#services" data-i18n="nav_services">Pakalpojumi</a></li>
+          <li><a href="#buy" data-i18n="nav_buy">Iepērkam</a></li>
+          <li><a href="#products" data-i18n="nav_products">Produkcija</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Kontakti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot_contact">Kontakti</h4>
+        <ul>
+          <li><a href="tel:+37120231000">+371 20 231 000</a></li>
+          <li><a href="mailto:javisi@inbox.lv">javisi@inbox.lv</a></li>
+          <li><span class="footer-addr">Lepeste, Mežvidu pag.,<br>Ludzas nov., LV-5725</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> SIA Javisi. <span data-i18n="foot_rights">Visas tiesības aizsargātas.</span></span>
+      <span data-i18n="foot_reg">Reģ. Nr. / PVN: papildināms</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+/* all photos and the video live in the "img" folder next to index.html */
+const pic = (file, altKey) => `<img src="img/${file}" alt="" data-alt="${altKey}" loading="lazy" decoding="async" onerror="this.style.display='none'">`;
+
+const products = [
+  {key:'p1', img:pic('img4.png','p1_t')},   /* strapped bundle of edged birch boards */
+  {key:'p4', img:pic('img5.png','p4_t')},   /* stacked birch blanks, end view */
+  {key:'p5', img:pic('img9.avif','p5_t')},  /* wood chips */
+  {key:'p6', img:pic('img10.avif','p6_t')}, /* sawdust / shavings */
+];
+
+/* gallery: big = 2x2, wide = 2 columns */
+const galleryTiles = [
+  {file:'img7.JPG', cls:'big'},  /* yard with stacked packs */
+  {file:'img1.png', cls:''},     /* bundle top, logs behind */
+  {file:'img2.png', cls:''},     /* bundle top view */
+  {file:'img6.JPG', cls:''},     /* stack under the shed */
+  {file:'img3.png', cls:''},     /* bundle 25x100x2400 */
+  {file:'img8.JPG', cls:'wide'}, /* yard, numbered packs */
+  {file:'img5.png', cls:''},     /* stack ends */
+  {file:'img4.png', cls:''},     /* bundle 25x75x2400 */
+];
+
+const I18N = {
+  lv:{
+    page_title:"SIA Javisi - Bērza kokapstrāde Latgalē",
+    nav_about:"Par mums",nav_services:"Pakalpojumi",nav_buy:"Iepērkam",nav_products:"Produkcija",nav_gallery:"Galerija",nav_contact:"Kontakti",
+    menu_open:"Atvērt izvēlni",menu_close:"Aizvērt izvēlni",
+    hero_kicker:"Bērza kokapstrāde Latgalē",
+    hero_h1_a:"No baļķa līdz ",hero_h1_b:"zāģmateriālam.",
+    hero_sub:"SIA Javisi ir kokapstrādes uzņēmums Ludzas novadā. Specializējamies bērza zāģmateriālu ražošanā un zāģējam pēc jūsu izmēriem.",
+    hero_cta1:"Mūsu produkcija",hero_cta2:"Sazināties",
+    hs1_t:"Precīza zāģēšana",hs1_p:"Vienmērīga kvalitāte katrā partijā.",
+    hs2_t:"Bērza specializācija",hs2_p:"Strādājam ar bērza koksni.",
+    hs3_t:"Pēc pasūtījuma",hs3_p:"Zāģējam pēc jūsu izmēriem.",
+    about_eyebrow:"Par mums",about_title:"Kokapstrāde, kas sākas mežā",
+    about_lead:"SIA Javisi ir kokapstrādes uzņēmums Ludzas novadā, Latgalē. Iepērkam apaļkoku un ražojam kvalitatīvus bērza zāģmateriālus.",
+    about_p2:"Katrā posmā, no baļķa atlases līdz gatavam zāģmateriālam, ievērojam kvalitāti un nolīgtos termiņus.",
+    about_cta:"Runāsim par sadarbību",
+    stat1_n:"2011",stat1_l:"Uzņēmuma dibināšanas gads",stat2_n:"25+",stat2_l:"Darbinieki komandā",
+    stat3_n:"30 000 m³",stat3_l:"Apstrādāta koksne gadā",stat4_n:"8",stat4_l:"Eksporta valstis Eiropā",
+    svc_eyebrow:"Ko mēs darām",svc_title:"Bērza kokapstrāde no baļķa līdz dēlim",
+    svc_lead:"Iepērkam apaļkoku, zāģējam bērza zāģmateriālus un piedāvājam ražošanas blakusproduktus.",
+    svc1_t:"Bērza zāģmateriāli",svc1_p:"Kvalitatīvi bērza kokmateriāli FRAME GRADE kvalitātē.",
+    svc2_t:"Zāģēšana pēc pasūtījuma",svc2_p:"Zāģējam pēc jūsu norādītajiem izmēriem un kvalitātes prasībām.",
+    svc3_t:"Šķelda un skaidas",svc3_p:"Ražošanas blakusprodukti: šķelda un zāģskaidas.",
+    buy_eyebrow:"Iepērkam",buy_title:"Iepērkam bērza taras klučus",
+    buy_lead:"Pērkam bērza taras klučus. Sazinieties ar mums par aktuālajām cenām un piegādes noteikumiem.",
+    sp1:"Bērzs",spec_len_k:"Garums",spec_len_v:"2,5 m / 2,8 m",spec_dia_k:"Diametrs",spec_dia_v:"līdz 30 cm",buy_cta:"Uzzināt cenas",
+    terms_title:"Piegādes noteikumi",
+    term1:"<b>Piegāde</b> darba dienās no plkst. 8.00 līdz 22.00.",
+    term2:"Kravai pievieno <b>ciršanas apliecinājuma kopiju</b> un izcelsmes ķēdi līdz meža īpašniekam.",
+    term3:"Pavaddokumentus var iesūtīt <b>iepriekš</b> uz e-pastu vai WhatsApp.",
+    term4:"Bez pilna dokumentu komplekta kravas <b>netiek apmaksātas</b>.",
+    prod_eyebrow:"Produkcija",prod_title:"Ko mēs ražojam",
+    prod_lead:"Kvalitatīvi bērza kokmateriāli būvniecībai un ražošanai.",
+    p1_t:"Bērza kokmateriāli FRAME GRADE",p1_p:"Apzāģēti bērza kokmateriāli FRAME GRADE kvalitātē pēc jūsu izmēriem.",
+    p4_t:"Bērza sagataves",p4_p:"Bērza sagataves un materiāls tālākai apstrādei ražotājiem.",
+    p5_t:"Šķelda",p5_p:"Kurināmā šķelda no ražošanas blakusproduktiem.",
+    p6_t:"Skaidas",p6_p:"Zāģskaidas pakaišiem un kurināmā granulu ražošanai.",
+    p1_tag:"frame grade",p4_tag:"sagataves",p5_tag:"šķelda",p6_tag:"skaidas",
+    gal_eyebrow:"Galerija",gal_title:"Ieskats mūsu darbā",
+    gal_alt:"SIA Javisi bērza kokmateriāli",
+    con_eyebrow:"Kontakti",con_title:"Sazināsimies",
+    con_person_k:"Kontaktpersona",con_tel_k:"Tālrunis",con_mail_k:"E-pasts",con_addr_k:"Adrese",con_road_k:"Piebraucamais ceļš",con_road_v:"Atvērt maršrutu kartē",
+    f_name:"Vārds *",f_email:"E-pasts *",f_phone:"Tālrunis",f_msg:"Ziņojums *",f_send:"Nosūtīt ziņojumu",
+    f_note:"Nospiežot \"Nosūtīt\", atvērsies jūsu e-pasta programma ar sagatavotu vēstuli.",
+    f_ok:"Paldies! Sagatavojām vēstuli, pabeidziet sūtīšanu e-pasta logā.",
+    foot_about:"Bērza kokapstrādes uzņēmums Ludzas novadā. Bērza kokmateriāli un blakusprodukti.",
+    foot_nav:"Sadaļas",foot_contact:"Kontakti",foot_rights:"Visas tiesības aizsargātas.",foot_reg:"Reģ. Nr. / PVN: papildināms"
+  },
+  en:{
+    page_title:"SIA Javisi - Birch wood processing in Latgale",
+    nav_about:"About",nav_services:"Services",nav_buy:"We buy",nav_products:"Products",nav_gallery:"Gallery",nav_contact:"Contact",
+    menu_open:"Open menu",menu_close:"Close menu",
+    hero_kicker:"Birch wood processing in Latgale",
+    hero_h1_a:"From log to ",hero_h1_b:"sawn timber.",
+    hero_sub:"SIA Javisi is a wood processing company in the Ludza region. We specialise in birch sawn timber and cut to your sizes.",
+    hero_cta1:"Our products",hero_cta2:"Get in touch",
+    hs1_t:"Precise sawing",hs1_p:"Consistent quality in every batch.",
+    hs2_t:"Birch specialists",hs2_p:"We work with birch timber.",
+    hs3_t:"Made to order",hs3_p:"We cut to your dimensions.",
+    about_eyebrow:"About us",about_title:"Wood processing that starts in the forest",
+    about_lead:"SIA Javisi is a wood processing company in the Ludza region of Latgale. We buy roundwood and produce quality birch sawn timber.",
+    about_p2:"At every stage, from log selection to finished timber, we hold to quality and agreed deadlines.",
+    about_cta:"Let's talk cooperation",
+    stat1_n:"2011",stat1_l:"Year the company was founded",stat2_n:"25+",stat2_l:"People on the team",
+    stat3_n:"30,000 m³",stat3_l:"Timber processed per year",stat4_n:"8",stat4_l:"Export markets in Europe",
+    svc_eyebrow:"What we do",svc_title:"Birch processing from log to board",
+    svc_lead:"We buy roundwood, saw birch timber and supply production by-products.",
+    svc1_t:"Birch sawn timber",svc1_p:"Quality birch timber in FRAME GRADE.",
+    svc2_t:"Cutting to order",svc2_p:"We cut to your specified sizes and quality grades.",
+    svc3_t:"Chips & sawdust",svc3_p:"Production by-products: wood chips and sawdust.",
+    buy_eyebrow:"We buy",buy_title:"We buy birch pallet logs",
+    buy_lead:"We buy birch pallet logs. Contact us for current prices and delivery terms.",
+    sp1:"Birch",spec_len_k:"Length",spec_len_v:"2.5 m / 2.8 m",spec_dia_k:"Diameter",spec_dia_v:"up to 30 cm",buy_cta:"Ask for prices",
+    terms_title:"Delivery terms",
+    term1:"<b>Delivery</b> on weekdays from 8:00 to 22:00.",
+    term2:"Each load needs a <b>copy of the felling certificate</b> and chain of origin to the forest owner.",
+    term3:"Accompanying documents can be sent <b>in advance</b> by email or WhatsApp.",
+    term4:"Without the full set of documents, loads <b>will not be paid for</b>.",
+    prod_eyebrow:"Products",prod_title:"What we produce",
+    prod_lead:"Quality birch timber for construction and manufacturing.",
+    p1_t:"Birch timber FRAME GRADE",p1_p:"Edged birch timber in FRAME GRADE, cut to your sizes.",
+    p4_t:"Birch blanks",p4_p:"Birch blanks and material for further processing by manufacturers.",
+    p5_t:"Wood chips",p5_p:"Fuel chips from production by-products.",
+    p6_t:"Sawdust",p6_p:"Sawdust for bedding and pellet production.",
+    p1_tag:"frame grade",p4_tag:"blanks",p5_tag:"chips",p6_tag:"sawdust",
+    gal_eyebrow:"Gallery",gal_title:"A look at our work",
+    gal_alt:"SIA Javisi birch timber",
+    con_eyebrow:"Contact",con_title:"Let's get in touch",
+    con_person_k:"Contact person",con_tel_k:"Phone",con_mail_k:"Email",con_addr_k:"Address",con_road_k:"Directions",con_road_v:"Open route on the map",
+    f_name:"Name *",f_email:"Email *",f_phone:"Phone",f_msg:"Message *",f_send:"Send message",
+    f_note:"When you press \"Send\", your email app opens with a ready-made message.",
+    f_ok:"Thank you! We prepared the message, finish sending it in your email window.",
+    foot_about:"Birch wood processing company in the Ludza region. Birch timber and by-products.",
+    foot_nav:"Sections",foot_contact:"Contact",foot_rights:"All rights reserved.",foot_reg:"Reg. No. / VAT: to be added"
+  },
+  ru:{
+    page_title:"SIA Javisi - Деревообработка берёзы в Латгалии",
+    nav_about:"О нас",nav_services:"Услуги",nav_buy:"Закупаем",nav_products:"Продукция",nav_gallery:"Галерея",nav_contact:"Контакты",
+    menu_open:"Открыть меню",menu_close:"Закрыть меню",
+    hero_kicker:"Деревообработка берёзы в Латгалии",
+    hero_h1_a:"От бревна до ",hero_h1_b:"пиломатериала.",
+    hero_sub:"SIA Javisi - деревообрабатывающее предприятие в Лудзенском крае. Мы специализируемся на берёзовых пиломатериалах и пилим по вашим размерам.",
+    hero_cta1:"Наша продукция",hero_cta2:"Связаться",
+    hs1_t:"Точная распиловка",hs1_p:"Стабильное качество в каждой партии.",
+    hs2_t:"Специализация на берёзе",hs2_p:"Работаем с берёзовой древесиной.",
+    hs3_t:"Под заказ",hs3_p:"Пилим по вашим размерам.",
+    about_eyebrow:"О нас",about_title:"Деревообработка, которая начинается в лесу",
+    about_lead:"SIA Javisi - деревообрабатывающее предприятие в Лудзенском крае, в Латгалии. Закупаем круглый лес и производим качественные берёзовые пиломатериалы.",
+    about_p2:"На каждом этапе, от отбора бревна до готового пиломатериала, мы соблюдаем качество и согласованные сроки.",
+    about_cta:"Обсудим сотрудничество",
+    stat1_n:"2011",stat1_l:"Год основания компании",stat2_n:"25+",stat2_l:"Сотрудников в команде",
+    stat3_n:"30 000 м³",stat3_l:"Переработанной древесины в год",stat4_n:"8",stat4_l:"Стран экспорта в Европе",
+    svc_eyebrow:"Что мы делаем",svc_title:"Обработка берёзы от бревна до доски",
+    svc_lead:"Закупаем круглый лес, пилим берёзовые пиломатериалы и предлагаем побочные продукты производства.",
+    svc1_t:"Берёзовые пиломатериалы",svc1_p:"Качественные берёзовые пиломатериалы класса FRAME GRADE.",
+    svc2_t:"Распиловка под заказ",svc2_p:"Пилим по указанным вами размерам и требованиям к качеству.",
+    svc3_t:"Щепа и опилки",svc3_p:"Побочные продукты производства: щепа и опилки.",
+    buy_eyebrow:"Закупаем",buy_title:"Закупаем берёзовый тарный кряж",
+    buy_lead:"Покупаем берёзовый тарный кряж. Свяжитесь с нами, чтобы узнать актуальные цены и условия поставки.",
+    sp1:"Берёза",spec_len_k:"Длина",spec_len_v:"2,5 м / 2,8 м",spec_dia_k:"Диаметр",spec_dia_v:"до 30 см",buy_cta:"Узнать цены",
+    terms_title:"Условия поставки",
+    term1:"<b>Поставка</b> в рабочие дни с 8:00 до 22:00.",
+    term2:"К грузу прилагается <b>копия разрешения на рубку</b> и цепочка происхождения до владельца леса.",
+    term3:"Сопроводительные документы можно отправить <b>заранее</b> по e-mail или в WhatsApp.",
+    term4:"Без полного комплекта документов грузы <b>не оплачиваются</b>.",
+    prod_eyebrow:"Продукция",prod_title:"Что мы производим",
+    prod_lead:"Качественные берёзовые пиломатериалы для строительства и производства.",
+    p1_t:"Берёзовые пиломатериалы FRAME GRADE",p1_p:"Обрезные берёзовые пиломатериалы класса FRAME GRADE по вашим размерам.",
+    p4_t:"Берёзовые заготовки",p4_p:"Берёзовые заготовки и материал для дальнейшей обработки.",
+    p5_t:"Щепа",p5_p:"Топливная щепа из побочных продуктов производства.",
+    p6_t:"Опилки",p6_p:"Опилки для подстилки и производства топливных гранул.",
+    p1_tag:"frame grade",p4_tag:"заготовки",p5_tag:"щепа",p6_tag:"опилки",
+    gal_eyebrow:"Галерея",gal_title:"Взгляд на нашу работу",
+    gal_alt:"Берёзовые пиломатериалы SIA Javisi",
+    con_eyebrow:"Контакты",con_title:"Давайте свяжемся",
+    con_person_k:"Контактное лицо",con_tel_k:"Телефон",con_mail_k:"E-mail",con_addr_k:"Адрес",con_road_k:"Как проехать",con_road_v:"Открыть маршрут на карте",
+    f_name:"Имя *",f_email:"E-mail *",f_phone:"Телефон",f_msg:"Сообщение *",f_send:"Отправить сообщение",
+    f_note:"После нажатия «Отправить» откроется ваша почтовая программа с готовым письмом.",
+    f_ok:"Спасибо! Письмо подготовлено, завершите отправку в окне почты.",
+    foot_about:"Деревообрабатывающее предприятие в Лудзенском крае. Берёзовые пиломатериалы и побочные продукты.",
+    foot_nav:"Разделы",foot_contact:"Контакты",foot_rights:"Все права защищены.",foot_reg:"Рег. № / НДС: будет добавлен"
+  }
+};
+
+let lang = 'lv';
+function renderProducts(){
+  const g = document.getElementById('prodGrid');
+  g.innerHTML = products.map(p=>`
+    <article class="prod">
+      <div class="prod-img">${p.img}<span class="prod-tag" data-i18n="${p.key}_tag">${I18N[lang][p.key+'_tag']}</span></div>
+      <div class="prod-body">
+        <h3 data-i18n="${p.key}_t">${I18N[lang][p.key+'_t']}</h3>
+        <p data-i18n="${p.key}_p">${I18N[lang][p.key+'_p']}</p>
+      </div>
+    </article>`).join('');
+}
+function renderGallery(){
+  const g = document.getElementById('galGrid');
+  g.innerHTML = galleryTiles.map(t=>`
+    <div class="gal-item${t.cls?' '+t.cls:''}">${pic(t.file,'gal_alt')}</div>`).join('');
+}
+function applyLang(l){
+  if(!I18N[l]) l = 'lv';
+  lang = l;
+  const d = I18N[l];
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const val = d[el.getAttribute('data-i18n')];
+    if(val===undefined) return;
+    if(/<b>|<br>/.test(val)) el.innerHTML = val; else el.textContent = val;
+  });
+  document.querySelectorAll('img[data-alt]').forEach(img=>{ img.alt = d[img.dataset.alt] || ''; });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active', b.dataset.lang===l));
+  document.getElementById('pageTitle').textContent = d.page_title;
+  burger.setAttribute('aria-label', mnav.classList.contains('open') ? d.menu_close : d.menu_open);
+  try{ localStorage.setItem('javisi-lang', l); }catch(e){}
+}
+
+const mnav = document.getElementById('mnav');
+const burger = document.getElementById('burger');
+
+document.getElementById('year').textContent = new Date().getFullYear();
+renderProducts();
+renderGallery();
+let savedLang = 'lv';
+try{ savedLang = localStorage.getItem('javisi-lang') || 'lv'; }catch(e){}
+applyLang(savedLang);
+
+document.querySelectorAll('.lang button').forEach(b=>{
+  b.addEventListener('click',()=>applyLang(b.dataset.lang));
+});
+
+const header = document.getElementById('header');
+const onScroll = ()=>header.classList.toggle('scrolled', window.scrollY>40);
+onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+const openNav = ()=>{mnav.classList.add('open');mnav.setAttribute('aria-hidden','false');burger.classList.add('is-open');burger.setAttribute('aria-expanded','true');burger.setAttribute('aria-label',I18N[lang].menu_close);document.body.classList.add('nav-open');document.body.style.overflow='hidden';};
+const closeNav = ()=>{mnav.classList.remove('open');mnav.setAttribute('aria-hidden','true');burger.classList.remove('is-open');burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label',I18N[lang].menu_open);document.body.classList.remove('nav-open');document.body.style.overflow='';};
+burger.addEventListener('click',()=>mnav.classList.contains('open')?closeNav():openNav());
+mnav.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',closeNav));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
+window.addEventListener('resize',()=>{if(window.innerWidth>1060)closeNav();});
+
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f = e.target;
+  if(!f.checkValidity()){f.reportValidity();return;}
+  const el = f.elements;
+  const name=el['name'].value.trim(), email=el['email'].value.trim(), phone=el['phone'].value.trim(), msg=el['message'].value.trim();
+  const subject = encodeURIComponent(`Pieprasījums no mājaslapas - ${name}`);
+  const body = encodeURIComponent(`Vārds: ${name}\nE-pasts: ${email}\nTālrunis: ${phone}\n\n${msg}`);
+  window.location.href = `mailto:javisi@inbox.lv?subject=${subject}&body=${body}`;
+  document.getElementById('formOk').classList.add('show');
+  f.reset();
+});
+</script>
+</body>
+</html>
